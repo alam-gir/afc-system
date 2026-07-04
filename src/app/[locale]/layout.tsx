@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import "../globals.css";
@@ -50,8 +51,10 @@ export default async function LocaleLayout({
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            {children}
-            <Toaster />
+            <TooltipProvider delayDuration={200}>
+              {children}
+              <Toaster />
+            </TooltipProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

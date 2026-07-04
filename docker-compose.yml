@@ -1,0 +1,41 @@
+services:
+  afc-system-app:
+    image: alamgirh/afc-system-dev:${IMAGE_TAG:-1.0.0}
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-4700}:3000"
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_URL: ${AUTH_URL}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - afc-network
+
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    ports:
+      - "${POSTGRES_PORT:-5438}:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - afc-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - afc-network
+
+networks:
+  afc-network:
+    driver: bridge
+
+volumes:
+  afc-postgres-data:

@@ -8,6 +8,34 @@
       "when": 1783158278988,
       "tag": "0000_motionless_psynapse",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1783161637386,
+      "tag": "0001_open_omega_flight",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783166861523,
+      "tag": "0002_bored_princess_powerful",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1783166910512,
+      "tag": "0003_misty_starfox",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1783168388367,
+      "tag": "0004_big_terror",
+      "breakpoints": true
     }
   ]
 }

@@ -2,8 +2,7 @@
 
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { HugeiconsIcon } from "@hugeicons/react";
-import { Logout01Icon } from "@hugeicons/core-free-icons";
+import { LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function LogoutButton() {
@@ -13,10 +12,11 @@ export function LogoutButton() {
     <Button
       variant="ghost"
       size="sm"
+      aria-label={t("logout")}
       onClick={() => signOut({ callbackUrl: "/login" })}
     >
-      <HugeiconsIcon icon={Logout01Icon} className="size-4" />
-      {t("logout")}
+      <LogOut className="size-4.5" />
+      <span className="hidden sm:inline">{t("logout")}</span>
     </Button>
   );
 }

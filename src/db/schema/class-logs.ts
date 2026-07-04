@@ -9,6 +9,7 @@ export const classLogs = pgTable("class_logs", {
     .notNull()
     .references(() => batches.id, { onDelete: "cascade" }),
   date: date("date").notNull(),
+  summary: text("summary"),
   chapter: text("chapter"),
   lessons: text("lessons"),
   pages: text("pages"),
@@ -21,10 +22,9 @@ export const classLogs = pgTable("class_logs", {
   // Free-text name, set by an admin, when a substitute outside the system took the class.
   substituteTeacherName: text("substitute_teacher_name"),
   // Who authored this log entry (teacher self-logging, or an admin on someone's behalf).
-  // Drives the 24h teacher-edit-window check.
-  createdByUserId: uuid("created_by_user_id")
-    .notNull()
-    .references(() => users.id, { onDelete: "restrict" }),
+  // Drives the 24h teacher-edit-window check. Nullable so the author can be hard-deleted
+  // later without blocking on this historical record.
+  createdByUserId: uuid("created_by_user_id").references(() => users.id, { onDelete: "set null" }),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });

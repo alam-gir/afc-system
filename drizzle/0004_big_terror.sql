@@ -1,0 +1,1 @@
+ALTER TABLE "class_logs" ADD COLUMN "summary" text;

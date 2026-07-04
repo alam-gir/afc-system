@@ -1,5 +1,3 @@
-import type { DefaultSession } from "next-auth";
-
 export type UserRole = "admin" | "teacher" | "student";
 
 declare module "next-auth" {
@@ -10,9 +8,12 @@ declare module "next-auth" {
 
   interface Session {
     user: {
+      id: string;
+      name: string;
+      email: string;
       role: UserRole;
       loginId: string;
-    } & DefaultSession["user"];
+    };
   }
 }
 

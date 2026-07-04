@@ -16,6 +16,7 @@
     "next": "Suivant",
     "previous": "Précédent",
     "actions": "Actions",
+    "view": "Voir",
     "yes": "Oui",
     "no": "Non",
     "close": "Fermer",
@@ -34,6 +35,10 @@
     "dark": "Sombre",
     "system": "Système",
     "toggle": "Changer de thème"
+  },
+  "footer": {
+    "copyright": "© {year} Alliance Française. Tous droits réservés.",
+    "credit": "Conçu et développé par"
   },
   "auth": {
     "loginTitle": "Connexion",
@@ -56,6 +61,27 @@
     "classLogs": "Journaux de cours",
     "profile": "Profil"
   },
+  "dashboard": {
+    "welcome": "Bienvenue, {name}",
+    "subtitle": "Voici un aperçu de vos groupes aujourd'hui.",
+    "totalBatches": "Nombre total de groupes",
+    "totalTeachers": "Nombre total d'enseignants",
+    "totalStudents": "Nombre total d'étudiants",
+    "activeBatches": "Groupes actifs",
+    "quickLinks": "Accès rapide",
+    "manageBatchesDesc": "Consulter, créer et gérer tous les groupes",
+    "manageTeachersDesc": "Consulter et gérer les comptes des enseignants",
+    "manageStudentsDesc": "Consulter et gérer les comptes des étudiants",
+    "manageProfileDesc": "Mettre à jour vos informations et votre mot de passe"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "createAdmin": "Créer un administrateur",
+    "createAdminDescription": "Ceci crée un nouveau compte administrateur avec un accès complet. Choisissez directement l'identifiant et le mot de passe : celui-ci ne sera pas égal à l'identifiant par défaut.",
+    "createAdminSuccess": "Compte administrateur créé avec succès.",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe"
+  },
   "roles": {
     "admin": "Administrateur",
     "teacher": "Enseignant",
@@ -75,7 +101,9 @@
     "confirmNewPassword": "Confirmer le nouveau mot de passe",
     "updateSuccess": "Profil mis à jour avec succès.",
     "passwordUpdateSuccess": "Mot de passe mis à jour avec succès.",
-    "currentPasswordIncorrect": "Le mot de passe actuel est incorrect."
+    "currentPasswordIncorrect": "Le mot de passe actuel est incorrect.",
+    "passwordMismatch": "Le nouveau mot de passe et sa confirmation ne correspondent pas.",
+    "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères."
   },
   "batch": {
     "title": "Groupe",
@@ -98,6 +126,17 @@
     "addStudent": "Ajouter un étudiant",
     "removeStudent": "Retirer un étudiant",
     "dateRange": "Période",
+    "classLogsHeading": "Journaux de cours",
+    "addLevel": "Ajouter « {name} »",
+    "addNew": "Ajouter un groupe",
+    "editTitle": "Modifier le groupe",
+    "createSuccess": "Groupe créé avec succès.",
+    "updateSuccess": "Groupe mis à jour avec succès.",
+    "deleteSuccess": "Groupe supprimé avec succès.",
+    "deleteConfirmDescription": "Cette action supprimera définitivement ce groupe, ses inscriptions et tous ses journaux de cours.",
+    "endBeforeStart": "La date de fin doit être postérieure ou égale à la date de début.",
+    "removeStudentConfirm": "Retirer cet étudiant du groupe ?",
+    "removeTeacherConfirm": "Retirer l'enseignant assigné à ce groupe ?",
     "methods": {
       "extensive": "Extensif",
       "intensive": "Intensif",
@@ -105,10 +144,35 @@
       "crash_course": "Cours accéléré"
     }
   },
+  "account": {
+    "loginIdTaken": "Cet identifiant est déjà utilisé.",
+    "resetPassword": "Réinitialiser le mot de passe",
+    "resetPasswordDescription": "Cette action réinitialise le mot de passe à l'identifiant ({loginId}).",
+    "resetPasswordSuccess": "Mot de passe réinitialisé avec succès."
+  },
+  "teacher": {
+    "addNew": "Ajouter un enseignant",
+    "editTitle": "Modifier l'enseignant",
+    "loginIdHint": "Le mot de passe initial est identique à l'identifiant. Il peut être modifié ultérieurement par un administrateur ou par l'enseignant lui-même.",
+    "createSuccess": "Enseignant créé avec succès.",
+    "updateSuccess": "Enseignant mis à jour avec succès.",
+    "deleteSuccess": "Enseignant supprimé avec succès.",
+    "deleteConfirmDescription": "Cette action supprimera définitivement le compte de cet enseignant. Ses journaux de cours seront conservés, mais ne seront plus liés à un compte actif."
+  },
+  "student": {
+    "addNew": "Ajouter un étudiant",
+    "editTitle": "Modifier l'étudiant",
+    "loginIdHint": "Le mot de passe initial est identique à l'identifiant. Il peut être modifié ultérieurement par un administrateur ou par l'étudiant lui-même.",
+    "createSuccess": "Étudiant créé avec succès.",
+    "updateSuccess": "Étudiant mis à jour avec succès.",
+    "deleteSuccess": "Étudiant supprimé avec succès.",
+    "deleteConfirmDescription": "Cette action supprimera définitivement le compte de cet étudiant et le retirera de tous les groupes."
+  },
   "classLog": {
     "title": "Journal de cours",
     "titlePlural": "Journaux de cours",
     "date": "Date",
+    "summary": "Résumé",
     "chapter": "Chapitre",
     "lessons": "Leçons",
     "pages": "Pages",
@@ -122,7 +186,18 @@
     "createdAt": "Créé le",
     "addToday": "Ajouter le journal de cours du jour",
     "editWindowExpired": "Ce journal ne peut plus être modifié (le délai de modification de 24 heures est dépassé).",
-    "notYourLog": "Vous ne pouvez modifier que les journaux de cours que vous avez créés."
+    "notYourLog": "Vous ne pouvez modifier que les journaux de cours que vous avez créés.",
+    "addNew": "Ajouter un journal de cours",
+    "editTitle": "Modifier le journal de cours",
+    "createSuccess": "Journal de cours créé avec succès.",
+    "updateSuccess": "Journal de cours mis à jour avec succès.",
+    "deleteSuccess": "Journal de cours supprimé avec succès.",
+    "deleteConfirmDescription": "Cette action supprimera définitivement ce journal de cours.",
+    "notAssignedToBatch": "Vous n'êtes pas assigné à ce groupe.",
+    "filterDateFrom": "Du",
+    "filterDateTo": "Au",
+    "edit": "Modifier",
+    "view": "Voir"
   },
   "deleteDialog": {
     "title": "Confirmer la suppression",

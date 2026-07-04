@@ -16,6 +16,7 @@
     "next": "Next",
     "previous": "Previous",
     "actions": "Actions",
+    "view": "View",
     "yes": "Yes",
     "no": "No",
     "close": "Close",
@@ -34,6 +35,10 @@
     "dark": "Dark",
     "system": "System",
     "toggle": "Toggle theme"
+  },
+  "footer": {
+    "copyright": "© {year} Alliance Française. All rights reserved.",
+    "credit": "Designed and developed by"
   },
   "auth": {
     "loginTitle": "Sign in",
@@ -56,6 +61,27 @@
     "classLogs": "Class logs",
     "profile": "Profile"
   },
+  "dashboard": {
+    "welcome": "Welcome back, {name}",
+    "subtitle": "Here's what's happening across your batches today.",
+    "totalBatches": "Total batches",
+    "totalTeachers": "Total teachers",
+    "totalStudents": "Total students",
+    "activeBatches": "Active batches",
+    "quickLinks": "Quick links",
+    "manageBatchesDesc": "View, create, and manage all batches",
+    "manageTeachersDesc": "View and manage teacher accounts",
+    "manageStudentsDesc": "View and manage student accounts",
+    "manageProfileDesc": "Update your details and password"
+  },
+  "settings": {
+    "title": "Settings",
+    "createAdmin": "Create admin",
+    "createAdminDescription": "This creates a new administrator account with full access. Choose the ID and password directly - it will not default to the ID.",
+    "createAdminSuccess": "Admin account created successfully.",
+    "password": "Password",
+    "confirmPassword": "Confirm password"
+  },
   "roles": {
     "admin": "Admin",
     "teacher": "Teacher",
@@ -75,7 +101,9 @@
     "confirmNewPassword": "Confirm new password",
     "updateSuccess": "Profile updated successfully.",
     "passwordUpdateSuccess": "Password updated successfully.",
-    "currentPasswordIncorrect": "Current password is incorrect."
+    "currentPasswordIncorrect": "Current password is incorrect.",
+    "passwordMismatch": "New password and confirmation do not match.",
+    "passwordTooShort": "Password must be at least 8 characters."
   },
   "batch": {
     "title": "Batch",
@@ -98,6 +126,17 @@
     "addStudent": "Add student",
     "removeStudent": "Remove student",
     "dateRange": "Date range",
+    "classLogsHeading": "Class logs",
+    "addLevel": "Add \"{name}\"",
+    "addNew": "Add batch",
+    "editTitle": "Edit batch",
+    "createSuccess": "Batch created successfully.",
+    "updateSuccess": "Batch updated successfully.",
+    "deleteSuccess": "Batch deleted successfully.",
+    "deleteConfirmDescription": "This will permanently delete this batch, its enrollments, and all of its class logs.",
+    "endBeforeStart": "The end date must be on or after the start date.",
+    "removeStudentConfirm": "Remove this student from the batch?",
+    "removeTeacherConfirm": "Remove the assigned teacher from this batch?",
     "methods": {
       "extensive": "Extensive",
       "intensive": "Intensive",
@@ -105,10 +144,35 @@
       "crash_course": "Crash course"
     }
   },
+  "account": {
+    "loginIdTaken": "This ID is already in use.",
+    "resetPassword": "Reset password",
+    "resetPasswordDescription": "This resets the password back to the ID ({loginId}).",
+    "resetPasswordSuccess": "Password reset successfully."
+  },
+  "teacher": {
+    "addNew": "Add teacher",
+    "editTitle": "Edit teacher",
+    "loginIdHint": "The initial password is the same as the ID. It can be changed later by an admin or the teacher themselves.",
+    "createSuccess": "Teacher created successfully.",
+    "updateSuccess": "Teacher updated successfully.",
+    "deleteSuccess": "Teacher deleted successfully.",
+    "deleteConfirmDescription": "This will permanently delete this teacher's account. Their historical class logs will be kept, but no longer linked to a live account."
+  },
+  "student": {
+    "addNew": "Add student",
+    "editTitle": "Edit student",
+    "loginIdHint": "The initial password is the same as the ID. It can be changed later by an admin or the student themselves.",
+    "createSuccess": "Student created successfully.",
+    "updateSuccess": "Student updated successfully.",
+    "deleteSuccess": "Student deleted successfully.",
+    "deleteConfirmDescription": "This will permanently delete this student's account and remove them from all batches."
+  },
   "classLog": {
     "title": "Class log",
     "titlePlural": "Class logs",
     "date": "Date",
+    "summary": "Summary",
     "chapter": "Chapter",
     "lessons": "Lessons",
     "pages": "Pages",
@@ -122,7 +186,18 @@
     "createdAt": "Created at",
     "addToday": "Add today's class log",
     "editWindowExpired": "This log can no longer be edited (24-hour edit window has passed).",
-    "notYourLog": "You can only edit class logs you created."
+    "notYourLog": "You can only edit class logs you created.",
+    "addNew": "Add class log",
+    "editTitle": "Edit class log",
+    "createSuccess": "Class log created successfully.",
+    "updateSuccess": "Class log updated successfully.",
+    "deleteSuccess": "Class log deleted successfully.",
+    "deleteConfirmDescription": "This will permanently delete this class log.",
+    "notAssignedToBatch": "You are not assigned to this batch.",
+    "filterDateFrom": "From date",
+    "filterDateTo": "To date",
+    "edit": "Edit",
+    "view": "View"
   },
   "deleteDialog": {
     "title": "Confirm deletion",

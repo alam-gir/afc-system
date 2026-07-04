@@ -12,25 +12,20 @@ import {
 } from "drizzle-orm/pg-core";
 import { users } from "./users";
 
-export const batchLevel = pgEnum("batch_level", [
-  "A1.1",
-  "A1.2",
-  "A2.1",
-  "A2.2",
-  "B1.1",
-  "B1.2",
-  "B2.1",
-  "B2.2",
-  "C1",
-  "C2",
-]);
-
 export const batchMethod = pgEnum("batch_method", [
   "extensive",
   "intensive",
   "semi_intensive",
   "crash_course",
 ]);
+
+// Open-ended lookup list (not a fixed enum) so admins can add new levels
+// from the batch form without a schema migration.
+export const batchLevels = pgTable("batch_levels", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull().unique(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
 
 export const batches = pgTable("batches", {
   id: uuid("id").primaryKey().defaultRandom(),
@@ -41,8 +36,11 @@ export const batches = pgTable("batches", {
   durationPerClassHours: numeric("duration_per_class_hours", {
     precision: 4,
     scale: 2,
+    mode: "number",
   }).notNull(),
-  level: batchLevel("level").notNull(),
+  levelId: uuid("level_id")
+    .notNull()
+    .references(() => batchLevels.id, { onDelete: "restrict" }),
   method: batchMethod("method").notNull(),
   classRoom: text("class_room").notNull(),
   classTime: text("class_time").notNull(),
@@ -68,6 +66,7 @@ export const batchEnrollments = pgTable(
 
 export const batchesRelations = relations(batches, ({ one, many }) => ({
   teacher: one(users, { fields: [batches.teacherId], references: [users.id] }),
+  level: one(batchLevels, { fields: [batches.levelId], references: [batchLevels.id] }),
   enrollments: many(batchEnrollments),
 }));
 

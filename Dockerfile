@@ -30,6 +30,15 @@ ENV DATABASE_URL="postgresql://user:password@localhost:5432/db" \
     AUTH_SECRET="build-time-placeholder"
 RUN pnpm build
 
+# ---- prod-deps: production-only node_modules for scripts/migrate.mjs ----
+# Next's standalone trace only bundles what the Next.js server itself imports,
+# not this separately-run migration script, so it needs its own node_modules.
+FROM base AS prod-deps
+RUN apk add --no-cache libc6-compat
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
+    pnpm install --prod --frozen-lockfile
+
 # ---- runner: minimal production image ----
 FROM node:${NODE_VERSION} AS runner
 WORKDIR /app
@@ -41,6 +50,7 @@ ENV NODE_ENV=production \
 RUN addgroup --system --gid 1001 nodejs \
     && adduser --system --uid 1001 nextjs
 
+COPY --from=prod-deps --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static

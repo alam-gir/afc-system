@@ -6,6 +6,9 @@ import type { UserRole } from "@/types/next-auth";
  * middleware, which must not bundle Node-only dependencies.
  */
 export const authConfig: NextAuthConfig = {
+  // AUTH_TRUST_HOST doesn't reliably reach this config's middleware/edge
+  // instance in self-hosted deployments, so set it directly here too.
+  trustHost: true,
   pages: {
     signIn: "/login",
   },

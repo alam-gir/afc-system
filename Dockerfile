@@ -13,8 +13,8 @@ WORKDIR /app
 
 # ---- deps: install all dependencies (needed to build) ----
 FROM base AS deps
-# argon2 ships a prebuilt musl binary and is marked pnpm.neverBuiltDependencies
-# in package.json, so no native build toolchain is needed here.
+# argon2 ships a prebuilt musl binary that node-gyp-build resolves directly,
+# so no native build toolchain (python3/make/g++) is needed here.
 RUN apk add --no-cache libc6-compat
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \

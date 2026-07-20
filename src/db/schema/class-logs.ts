@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { date, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { boolean, date, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { batches } from "./batches";
 import { users } from "./users";
 
@@ -9,6 +9,12 @@ export const classLogs = pgTable("class_logs", {
     .notNull()
     .references(() => batches.id, { onDelete: "cascade" }),
   date: date("date").notNull(),
+  // Whether the teacher followed the batch's uploaded calendar for this class.
+  // Defaults true so pre-existing logs (recorded before this field existed) aren't
+  // misrepresented as a flagged deviation.
+  followedCalendar: boolean("followed_calendar").notNull().default(true),
+  // Required, and only meaningful, when followedCalendar is false.
+  calendarDeviationReason: text("calendar_deviation_reason"),
   summary: text("summary"),
   chapter: text("chapter"),
   lessons: text("lessons"),

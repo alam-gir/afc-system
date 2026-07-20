@@ -16,8 +16,13 @@ type ActionResult = { success: true; id: string } | { success: false; error: str
 type SimpleResult = { success: true } | { success: false; error: string };
 
 function toContentValues(input: ClassLogFieldsInput) {
+  const followedCalendar = input.followedCalendar === "yes";
   return {
     date: input.date,
+    followedCalendar,
+    calendarDeviationReason: followedCalendar
+      ? null
+      : (input.calendarDeviationReason ?? "").trim(),
     summary: input.summary || null,
     chapter: input.chapter || null,
     lessons: input.lessons || null,

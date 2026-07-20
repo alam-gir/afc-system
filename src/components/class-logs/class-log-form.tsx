@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
@@ -10,6 +10,7 @@ import { createClassLog, updateClassLog } from "@/lib/actions/class-logs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Field,
   FieldContent,
@@ -17,6 +18,7 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
+  FieldTitle,
 } from "@/components/ui/field";
 
 type ClassLogFormProps = {
@@ -31,6 +33,8 @@ type ClassLogFormProps = {
 
 const emptyFieldsDefaults: ClassLogFieldsInput = {
   date: new Date().toISOString().slice(0, 10),
+  followedCalendar: undefined,
+  calendarDeviationReason: "",
   summary: "",
   chapter: "",
   lessons: "",
@@ -60,11 +64,15 @@ export function ClassLogForm({
   const {
     register,
     handleSubmit,
+    control,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<ClassLogFieldsInput>({
     resolver: zodResolver(classLogFieldsSchema),
     defaultValues: defaultValues ?? emptyFieldsDefaults,
   });
+
+  const followedCalendar = watch("followedCalendar");
 
   async function onSubmit(values: ClassLogFieldsInput) {
     if (showTeacherName && !teacherName.trim()) {
@@ -113,6 +121,56 @@ export function ClassLogForm({
               />
               <FieldDescription>{t("substituteTeacherHint")}</FieldDescription>
               <FieldError>{teacherNameError}</FieldError>
+            </FieldContent>
+          </Field>
+        ) : null}
+
+        <Field data-invalid={!!errors.followedCalendar}>
+          <FieldLabel>{t("followedCalendar")} *</FieldLabel>
+          <FieldContent>
+            <Controller
+              control={control}
+              name="followedCalendar"
+              render={({ field }) => (
+                <RadioGroup
+                  value={field.value}
+                  onValueChange={field.onChange}
+                  className="grid grid-cols-2 gap-3"
+                >
+                  <FieldLabel htmlFor="followedCalendar-yes">
+                    <Field orientation="horizontal">
+                      <RadioGroupItem value="yes" id="followedCalendar-yes" />
+                      <FieldTitle>{tc("yes")}</FieldTitle>
+                    </Field>
+                  </FieldLabel>
+                  <FieldLabel htmlFor="followedCalendar-no">
+                    <Field orientation="horizontal">
+                      <RadioGroupItem value="no" id="followedCalendar-no" />
+                      <FieldTitle>{tc("no")}</FieldTitle>
+                    </Field>
+                  </FieldLabel>
+                </RadioGroup>
+              )}
+            />
+            <FieldError>{errors.followedCalendar ? tc("required") : null}</FieldError>
+          </FieldContent>
+        </Field>
+
+        {followedCalendar === "no" ? (
+          <Field data-invalid={!!errors.calendarDeviationReason}>
+            <FieldLabel htmlFor="calendarDeviationReason">
+              {t("calendarDeviationReason")} *
+            </FieldLabel>
+            <FieldContent>
+              <Textarea
+                id="calendarDeviationReason"
+                rows={3}
+                {...register("calendarDeviationReason")}
+              />
+              <FieldDescription>{t("calendarDeviationReasonHint")}</FieldDescription>
+              <FieldError>
+                {errors.calendarDeviationReason ? t("calendarDeviationReasonMinLength") : null}
+              </FieldError>
             </FieldContent>
           </Field>
         ) : null}

@@ -33,6 +33,8 @@ export async function listClassLogs(
     .select({
       id: classLogs.id,
       date: classLogs.date,
+      followedCalendar: classLogs.followedCalendar,
+      calendarDeviationReason: classLogs.calendarDeviationReason,
       summary: classLogs.summary,
       chapter: classLogs.chapter,
       lessons: classLogs.lessons,

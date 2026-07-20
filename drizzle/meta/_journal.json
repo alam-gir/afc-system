@@ -43,6 +43,13 @@
       "when": 1784583075272,
       "tag": "0005_real_sister_grimm",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1784586102256,
+      "tag": "0006_add_class_log_followed_calendar",
+      "breakpoints": true
     }
   ]
 }

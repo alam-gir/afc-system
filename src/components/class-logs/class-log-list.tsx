@@ -5,6 +5,7 @@ import { MoreVertical, Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { useRouter } from "@/i18n/navigation";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import {
@@ -22,6 +23,8 @@ import { deleteClassLog } from "@/lib/actions/class-logs";
 export type ClassLogRow = {
   id: string;
   date: string;
+  followedCalendar: boolean;
+  calendarDeviationReason: string | null;
   summary: string | null;
   chapter: string | null;
   lessons: string | null;
@@ -88,7 +91,12 @@ export function ClassLogList({ batchId, items, canDelete }: ClassLogListProps) {
             >
               <CardHeader className="flex flex-row items-start justify-between gap-2">
                 <div className="min-w-0">
-                  <p className="text-sm font-semibold">{log.date}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-sm font-semibold">{log.date}</p>
+                    {!log.followedCalendar ? (
+                      <Badge variant="destructive">{t("calendarNotFollowed")}</Badge>
+                    ) : null}
+                  </div>
                   <p className="text-xs text-muted-foreground">
                     {t("teacher")}: {log.teacherName ?? log.substituteTeacherName ?? "—"}
                   </p>
@@ -161,6 +169,8 @@ export function ClassLogList({ batchId, items, canDelete }: ClassLogListProps) {
             logId={editTarget.id}
             defaultValues={{
               date: editTarget.date,
+              followedCalendar: editTarget.followedCalendar ? "yes" : "no",
+              calendarDeviationReason: editTarget.calendarDeviationReason ?? "",
               summary: editTarget.summary ?? "",
               chapter: editTarget.chapter ?? "",
               lessons: editTarget.lessons ?? "",

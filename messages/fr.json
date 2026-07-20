@@ -199,6 +199,22 @@
     "edit": "Modifier",
     "view": "Voir"
   },
+  "batchDocument": {
+    "course_plan": "Plan de cours",
+    "calendar": "Calendrier",
+    "addCoursePlan": "Ajouter le plan de cours",
+    "addCalendar": "Ajouter le calendrier",
+    "update": "Mettre à jour",
+    "notUploaded": "{type} : pas encore téléversé",
+    "browseOrDrop": "Cliquez pour parcourir ou glissez-déposez",
+    "removeFile": "Retirer le fichier",
+    "uploadHint": "PDF uniquement, 10 Mo maximum.",
+    "invalidFileType": "Seuls les fichiers PDF sont pris en charge.",
+    "fileTooLarge": "Le fichier doit être un PDF de moins de 10 Mo.",
+    "uploadSuccess": "Document téléversé avec succès.",
+    "deleteSuccess": "Document supprimé avec succès.",
+    "deleteConfirmDescription": "Cette action supprimera définitivement ce document."
+  },
   "deleteDialog": {
     "title": "Confirmer la suppression",
     "description": "Cette action est définitive et irréversible. Saisissez {word} pour confirmer.",

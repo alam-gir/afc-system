@@ -199,6 +199,22 @@
     "edit": "Edit",
     "view": "View"
   },
+  "batchDocument": {
+    "course_plan": "Course Plan",
+    "calendar": "Calendar",
+    "addCoursePlan": "Add Course Plan",
+    "addCalendar": "Add Calendar",
+    "update": "Update",
+    "notUploaded": "{type}: not uploaded yet",
+    "browseOrDrop": "Click to browse or drag and drop",
+    "removeFile": "Remove file",
+    "uploadHint": "PDF only, max 10 MB.",
+    "invalidFileType": "Only PDF files are supported.",
+    "fileTooLarge": "File must be a PDF under 10 MB.",
+    "uploadSuccess": "Document uploaded successfully.",
+    "deleteSuccess": "Document deleted successfully.",
+    "deleteConfirmDescription": "This will permanently delete this document."
+  },
   "deleteDialog": {
     "title": "Confirm deletion",
     "description": "This action is permanent and cannot be undone. Type {word} to confirm.",

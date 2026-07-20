@@ -2,12 +2,14 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { DoorOpen, Clock, Layers } from "lucide-react";
 import { BatchInfoBadge } from "@/components/batches/batch-info-badge";
+import { BatchDocumentsSection } from "@/components/batches/batch-documents-section";
 import { ClassLogFilters } from "@/components/class-logs/class-log-filters";
 import { ClassLogList, type ClassLogRow } from "@/components/class-logs/class-log-list";
 import { ClassLogCreateButton } from "@/components/class-logs/class-log-create-button";
 import { ListPagination } from "@/components/list-pagination";
 import { requireRole } from "@/lib/require-role";
 import { getBatchWithTeacher } from "@/lib/queries/batches";
+import { listBatchDocuments } from "@/lib/queries/batch-documents";
 import { listClassLogs } from "@/lib/queries/class-logs";
 import { isWithinClassLogEditWindow } from "@/lib/class-log-edit-window";
 import { isUuid } from "@/lib/is-uuid";
@@ -34,6 +36,8 @@ export default async function TeacherBatchDetailPage({
   const row = await getBatchWithTeacher(id);
   if (!row || row.batch.teacherId !== user.id) notFound();
 
+  const documents = await listBatchDocuments(id);
+
   const { items, totalPages } = await listClassLogs(id, {
     page,
     search: sp.q,
@@ -59,6 +63,8 @@ export default async function TeacherBatchDetailPage({
           <BatchInfoBadge icon={Clock}>{formatTimeDisplay(row.batch.classTime)}</BatchInfoBadge>
         </div>
       </div>
+
+      <BatchDocumentsSection batchId={id} documents={documents} types={["course_plan", "calendar"]} />
 
       <p className="text-sm font-medium">{tcl("titlePlural")}</p>
 

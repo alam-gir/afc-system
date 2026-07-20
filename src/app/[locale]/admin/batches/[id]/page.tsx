@@ -8,7 +8,9 @@ import { BatchInfoBadge } from "@/components/batches/batch-info-badge";
 import { BatchTeacherSection } from "@/components/batches/batch-teacher-section";
 import { BatchStudentsSection } from "@/components/batches/batch-students-section";
 import { BatchActionsMenu } from "@/components/batches/batch-actions-menu";
+import { BatchDocumentsSection } from "@/components/batches/batch-documents-section";
 import { getBatchWithTeacher, listEnrolledStudents } from "@/lib/queries/batches";
+import { listBatchDocuments } from "@/lib/queries/batch-documents";
 import { listBatchLevels } from "@/lib/queries/batch-levels";
 import { isUuid } from "@/lib/is-uuid";
 import { formatTimeDisplay } from "@/lib/format-time";
@@ -31,6 +33,7 @@ export default async function BatchDetailPage({
   const { batch, teacher, levelName } = row;
   const students = await listEnrolledStudents(id);
   const levels = await listBatchLevels();
+  const documents = await listBatchDocuments(id);
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-4">
@@ -118,6 +121,13 @@ export default async function BatchDetailPage({
       ) : null}
 
       <BatchTeacherSection batchId={batch.id} teacher={teacher?.id ? { id: teacher.id, name: teacher.name, loginId: teacher.loginId } : null} />
+
+      <BatchDocumentsSection
+        batchId={batch.id}
+        documents={documents}
+        types={["course_plan", "calendar"]}
+        editable
+      />
 
       <BatchStudentsSection batchId={batch.id} students={students} />
 

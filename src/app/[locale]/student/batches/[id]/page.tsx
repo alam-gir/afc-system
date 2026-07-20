@@ -2,11 +2,13 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { DoorOpen, Clock, User, Layers } from "lucide-react";
 import { BatchInfoBadge } from "@/components/batches/batch-info-badge";
+import { BatchDocumentsSection } from "@/components/batches/batch-documents-section";
 import { ClassLogFilters } from "@/components/class-logs/class-log-filters";
 import { ClassLogList, type ClassLogRow } from "@/components/class-logs/class-log-list";
 import { ListPagination } from "@/components/list-pagination";
 import { requireRole } from "@/lib/require-role";
 import { getBatchForStudent } from "@/lib/queries/batches";
+import { listBatchDocuments } from "@/lib/queries/batch-documents";
 import { listClassLogs } from "@/lib/queries/class-logs";
 import { isUuid } from "@/lib/is-uuid";
 import { formatTimeDisplay } from "@/lib/format-time";
@@ -32,6 +34,8 @@ export default async function StudentBatchDetailPage({
   const row = await getBatchForStudent(id, user.id);
   if (!row) notFound();
 
+  const documents = await listBatchDocuments(id);
+
   const { items, totalPages } = await listClassLogs(id, {
     page,
     search: sp.q,
@@ -55,6 +59,8 @@ export default async function StudentBatchDetailPage({
           {row.teacher ? <BatchInfoBadge icon={User}>{row.teacher.name}</BatchInfoBadge> : null}
         </div>
       </div>
+
+      <BatchDocumentsSection batchId={id} documents={documents} types={["course_plan"]} />
 
       <p className="text-sm font-medium">{tcl("titlePlural")}</p>
 
